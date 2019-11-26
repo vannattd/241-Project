@@ -1,0 +1,26 @@
+#241 project done in Bash by Logan Jaglowski and Dylan Vannatter
+#!/bin/bash
+valid=true
+echo "Enter a starting file"
+read fp
+if [ -f "$fp" ]; then
+md5sum $fp > gg.txt
+else
+echo "File does not exist. Terminiating"
+exit 1
+fi
+while [ $valid ]
+do
+echo "Enter File Name"
+read fn
+if [ -f "$fn" ]; then
+md5sum $fn >> gg.txt
+else
+echo "File does not exist. Computing top hash"
+break
+fi
+done
+
+
+
+
