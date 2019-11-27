@@ -1,0 +1,31 @@
+#!/bin/bash
+sort -k2 gg.txt -o gg.txt
+declare -i x
+x=$(wc -l gg.txt | cut -d " " -f 1)
+let stuff=$x%2
+
+if ! (($stuff % 2 == 0)); 
+then
+tail -n 1 gg.txt >> gg.txt
+echo "hello"
+fi
+
+s=
+y=
+combined=
+hash=
+while IFS= read -r line
+do
+	if [ -z "$s" ]; then
+		y=$line
+		combined="$s+$y"
+		hash="$(echo -n $combined | md5sum)"
+		s=
+		y=
+	else
+		s=$line
+	fi
+done < "gg.txt"
+tail -n 1 gg.txt >> a.txt
+echo "The final hash is: "
+echo $hash

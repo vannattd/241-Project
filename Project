@@ -20,7 +20,7 @@ echo "File does not exist. Computing top hash"
 break
 fi
 done
-
+bash md5Hashes
 
 
 
