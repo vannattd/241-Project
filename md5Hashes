@@ -2,30 +2,48 @@
 sort -k2 gg.txt -o gg.txt
 declare -i x
 x=$(wc -l gg.txt | cut -d " " -f 1)
-let stuff=$x%2
+declare -i stuff
+stuff=$x
 
-if ! (($stuff % 2 == 0)); 
+count=0
+while [ $stuff -gt 1 ]
+do
+	stuff=$(expr $stuff / 2)
+	((count++))
+done
+logCount=2^$count
+
+if ! (($stuff == $logCount)); 
 then
-tail -n 1 gg.txt >> gg.txt
-echo "hello"
+$logCount=$logCount*2
+$logCount=$logCount-$stuff
+while [ $stuff -gt -1 ]
+do
+	$stuff=$stuff-1
+	tail -n 1 gg.txt >> gg.txt
+done
 fi
 
-s=
+s=""
 y=
 combined=
 hash=
 while IFS= read -r line
 do
-	if [ -z "$s" ]; then
+	if [[ "$s" ]]; then
 		y=$line
 		combined="$s+$y"
 		hash="$(echo -n $combined | md5sum)"
-		s=
+		echo $hash >> gg.txt
+		s=""
 		y=
 	else
 		s=$line
 	fi
 done < "gg.txt"
-tail -n 1 gg.txt >> a.txt
+echo $hash >> a.txt
 echo "The final hash is: "
 echo $hash
+previousHash=$(tail -n 2 a.txt | head -n 1)
+echo "The previous hash was: "
+echo $previousHash
