@@ -1,8 +1,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <math.h>
+#include <string.h>
 
 typedef union uwb {
     unsigned w;
