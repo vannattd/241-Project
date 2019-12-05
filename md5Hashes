@@ -1,7 +1,7 @@
 #!/bin/bash
-sort -k2 gg.txt -o gg.txt
+sort -k2 mid.txt -o mid.txt
 declare -i x
-x=$(wc -l gg.txt | cut -d " " -f 1)
+x=$(wc -l mid.txt | cut -d " " -f 1)
 declare -i stuff
 stuff=$x
 
@@ -20,7 +20,7 @@ $logCount=$logCount-$stuff
 while [ $stuff -gt -1 ]
 do
 	$stuff=$stuff-1
-	tail -n 1 gg.txt >> gg.txt
+	tail -n 1 mid.txt >> mid.txt
 done
 fi
 
@@ -34,16 +34,16 @@ do
 		y=$line
 		combined="$s+$y"
 		hash="$(echo -n $combined | md5sum)"
-		echo $hash >> gg.txt
+		echo $hash >> mid.txt
 		s=""
 		y=
 	else
 		s=$line
 	fi
-done < "gg.txt"
-echo $hash >> a.txt
+done < "mid.txt"
+echo $hash >> top.txt
 echo "The final hash is: "
 echo $hash
-previousHash=$(tail -n 2 a.txt | head -n 1)
+previousHash=$(tail -n 2 top.txt | head -n 1)
 echo "The previous hash was: "
 echo $previousHash

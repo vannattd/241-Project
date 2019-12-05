@@ -4,7 +4,7 @@ valid=true
 echo "Enter a starting file"
 read fp
 if [ -f "$fp" ]; then
-md5sum $fp > gg.txt
+md5sum $fp > mid.txt
 else
 echo "File does not exist. Terminiating"
 exit 1
@@ -14,7 +14,7 @@ do
 echo "Enter File Name"
 read fn
 if [ -f "$fn" ]; then
-md5sum $fn >> gg.txt
+md5sum $fn >> mid.txt
 else
 echo "File does not exist. Computing top hash"
 break
