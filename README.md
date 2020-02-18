@@ -2,4 +2,4 @@
 
 Final Project by Logan Jaglowski and Dylan Vannatter
 
-Using Project and md5Hashes scripts along with some testing and test files.
+Using md5Hash scripts to test whether a file has been altered.
